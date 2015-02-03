@@ -10,7 +10,7 @@
 
 @interface MyApp : NSObject
 
--(void)login;
+-(NSString *)login;
 -(void)logout;
 -(NSString *)menu;
 -(void)optionOne;
@@ -19,10 +19,11 @@
 -(void)optionFour;
 
 @property (strong, nonatomic, readwrite) NSString *currentUser;
+@property (strong, nonatomic, readwrite) NSString *response;
 @property (strong, nonatomic) NSMutableDictionary *motherDict;
-@property (strong, nonatomic) NSMutableDictionary *questionsAndAnswers;
-@property (strong, nonatomic) NSMutableArray *questionList;
 @property (strong, nonatomic) NSMutableArray *questions;
+
+
 -(void)execute;
 
 
