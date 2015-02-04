@@ -19,22 +19,18 @@
     
     self.motherDict = [[NSMutableDictionary alloc] init];
     self.currentUser = [[NSString alloc] init];
-    self.questions = [[NSMutableArray alloc] initWithArray:@[@"Where are you?", @"Whats your fav color?", @"Whats your fav animal?"]];
+    self.questions = [[NSMutableArray alloc] initWithArray:@[@"Where is the coolest place you've been to?", @"If you could only bring one thing with you to a deserted island, what would it be?", @"What is your favorite movie of all time?"]];
   
     [self login];
 
 }
 
-
--(NSString *)login {
+-(void)login {
 
     NSLog(@"Please enter your full name to log in");
     self.currentUser = [self requestKeyboardInput];
-    
 
     [self menu];
-    return self.currentUser;
-    
 }
 
 -(void)logout {
@@ -73,12 +69,53 @@
         self.motherDict[self.currentUser] = questionsAndAnswers;
         [self.motherDict setObject:questionsAndAnswers forKey:self.currentUser];
     }
-    for (NSString *question in self.questions) {
+    
+    NSLog(@"Would you like generic or specific questions?\rOur categories are:\rGeneric\rSports\rProgramming\rTravel\rArt");
+    NSString *reply = [self requestKeyboardInput];
+    
+    if ([[reply lowercaseString] isEqualToString:@"sports"]) {
+        NSArray *sportsQuestions = @[@"What is your favorite sport?", @"What is your favorite sports team?", @"Who is your favorite athlete?"];
+        for (NSString *question in sportsQuestions) {
+            NSLog(@"%@", question);
+            self.response = [self requestKeyboardInput];
+            NSMutableDictionary *currentUserDict = self.motherDict[self.currentUser];
+            [currentUserDict setObject:self.response forKey:question];
+        }
+    }
+    else if ([[reply lowercaseString] isEqualToString:@"food"]) {
+        NSArray *foodQuestions = @[@"Do you consider yourself a foodie?", @"What is your favorite cuisine?", @"What is your least favorite food?"];
+        for (NSString *question in foodQuestions) {
+            NSLog(@"%@", question);
+            self.response = [self requestKeyboardInput];
+            NSMutableDictionary *currentUserDict = self.motherDict[self.currentUser];
+            [currentUserDict setObject:self.response forKey:question];
+        }
+    }
+    else if ([[reply lowercaseString] isEqualToString:@"programming"]) {
+        NSArray *programmingQuestions = @[@"What's been your favorite part of Flatiron so far?", @"Why did you choose the iOS track?", @"What projects interest you?"];
+        for (NSString *question in programmingQuestions) {
+            NSLog(@"%@", question);
+            self.response = [self requestKeyboardInput];
+            NSMutableDictionary *currentUserDict = self.motherDict[self.currentUser];
+            [currentUserDict setObject:self.response forKey:question];
+        }
+    }
+    else if ([[reply lowercaseString] isEqualToString:@"travel"]) {
+        NSArray *travelQuestions = @[@"If you could leave tomorrow, where would you travel to?", @"What's been you favorite destination so far?", @"How many continents have you been to?"];
+        for (NSString *question in travelQuestions) {
+            NSLog(@"%@", question);
+            self.response = [self requestKeyboardInput];
+            NSMutableDictionary *currentUserDict = self.motherDict[self.currentUser];
+            [currentUserDict setObject:self.response forKey:question];
+        }
+    }
+    else if ([[reply lowercaseString] isEqualToString:@"generic"]) {
+        for (NSString *question in self.questions) {
         NSLog(@"%@", question);
         self.response = [self requestKeyboardInput];
         NSMutableDictionary *currentUserDict = self.motherDict[self.currentUser];
         [currentUserDict setObject:self.response forKey:question];
-        
+        }
     }
 
     [self menu];
