@@ -10,7 +10,7 @@
 
 @interface MyApp : NSObject
 
--(NSString *)login;
+-(void)login;
 -(void)logout;
 -(NSString *)menu;
 -(void)optionOne;
